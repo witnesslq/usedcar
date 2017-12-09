@@ -23,5 +23,10 @@ public class UserServiceTest extends TestCase {
 	public void testGetUserById() {
 		System.out.println(userService.getUserById(1).getName());
 	}
+	
+	@Test
+	public void testGetAllUser(){
+		System.out.println(userService.getAllUser());
+	}
 
 }

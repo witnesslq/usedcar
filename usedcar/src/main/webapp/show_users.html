@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>show_users</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+</head>
+
+<body>
+	<h2 align="center">
+		User List
+		</h1>
+		<table align="center" id="userList" border="1">
+			<tr>
+				<th>id</th>
+				<th>name</th>
+				<th>password</th>
+			</tr>
+		</table>
+		
+</body>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$.ajax({
+					url : "/usedcar/user",
+					type : "get",
+					data : {},
+					success : function(data) {
+						data = eval('(' + data + ')');
+						$.each(data.data, function(i, value) {
+							
+							$("#userList").append(
+									$("<tr><td>" + value.id + "</td><td>"
+											+ value.name + "</td><td>"
+											+ value.password + "</td></tr>"))
+						})
+					},
+					error : function() {
+						alert("query user list error!")
+					},
+					dataType : "json"
+				})
+			})
+</script>
+</html>
