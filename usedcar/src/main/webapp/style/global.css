@@ -1,0 +1,86 @@
+@media screen and (max-width: 1024px) {
+  .logo{left: 10px;}
+  .main, .footer{width: auto; }
+  .main{margin: 10px;}
+  .content{margin: 0;}
+  img{max-width: 100%;}
+}
+/* 图标 */
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1477416582'); /* IE9*/
+  src: url('iconfont.eot?t=1477416582#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1477416582') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1477416582') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1477416582#iconfont') format('svg'); /* iOS 4.1- */
+}
+/* 辅助 */
+pre{padding: 10px 15px; margin: 10px 0; font-size: 12px; border-left: 6px solid #009688;  background-color: #F2F2F2; font-family: Courier New; overflow: auto;}
+.fly-msg, .fly-error{padding:10px 15px; line-height:24px;}
+.fly-msg{background-color:#F8F8F8; color:#666;}
+.fly-msg a{color:#4F99CF}
+
+/*导航栏*/
+.header{
+	position:fixed; 
+	z-index: 10000; 
+	left:0; 
+	top:0; 
+	width:100%; 
+	height:65px; 
+	background-color: #0E0E0E;
+	border-bottom: 1px solid #0E0E0E;
+}
+.logo{position: absolute; left: 0; top: 13px;}
+.logo img{width: 83px; height: 40px;}
+
+.header .layui-nav {position: absolute; left: 150px; right: 0px;top: 0; padding: 0; background: none;}
+.header .layui-nav .layui-nav-item{margin: 0 20px; }
+.header .layui-layout-right{left: 90%; right: 0px}
+
+.layui-nav-left{
+	margin-left:100px;
+	float:left;	
+}
+.layui-nav-right{
+	margin-right:100px;
+	float:right;
+}
+.nav-left{margin-left:130px;}
+/*
+.footer {
+	width: auto; 
+	clear: both; 
+	text-align: center;
+}*/
+.footer{
+	padding: 10px 0; 
+	line-height: 20px; 
+	text-align: center; 
+	color: #666; 
+	font-weight: 300;}
+/*
+body .layui-layout-admin .footer-demo{height: auto; padding: 15px 0; line-height: 26px;}
+.footer a{padding: 0 5px;}
+*/
+/*首页与导航之间的间距*/
+.container{	
+	padding-top: 65px;
+    width: 100%;
+}
+.site-h1 {
+	padding-left: 200px;
+    margin-bottom: 20px;
+    line-height: 60px;
+    padding-bottom: 10px;
+    color: #393D49;
+    border-bottom: 1px solid #eee;
+    font-size: 28px;
+    font-weight: 300;
+}
+
+html{overflow-x: hidden; overflow-y: auto; background-color: #FFF;}
+body {
+	line-height:24px; 
+	font: 12px/1.5 'Microsoft Yahei', 'Simsun'; 
+	color: #666666;
+	}

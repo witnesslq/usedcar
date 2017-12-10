@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>二手车交易大数据分析平台</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="../layui/layui.all.js" charset="utf-8"></script>
+  <script src="../layui/layui.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="../style/global.css" media="all">
+  <link rel="stylesheet" href="../style/personal.css" media="all">
+  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+	<div class="layui-header header">
+    	<div class="layui-main">
+			<a class="logo" href="main.html" title="二手车交易大数据分析平台">
+				<img src="../img/logo1.png" alt="layui">
+			</a>
+			<ul class="layui-nav layui-layout-left">
+				<li class="layui-nav-item "><a href="main.html">首页</a></li>
+				<li class="layui-nav-item "><a href="search.html">搜索</a></li>
+				<li class="layui-nav-item "><a href="register_car_info.html">发布信息</a></li>
+					
+			</ul>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item">
+				<a href="javascript:;">我</a>
+				<dl class="layui-nav-child">
+				  <dd><a href="personal_center.html">个人中心</a></dd>
+				  <dd><a href="login.html">退出</a></dd>
+				</dl>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+<!--侧边栏-->
+<div class="personalmenu">
+<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px; height:600px">
+  <li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">账号管理</a>
+    <dl class="layui-nav-child">
+      <dd><a href="personal_center.html">个人信息</a></dd>
+      <dd><a href="have_publish_info.html">已发布信息</a></dd>
+      <dd><a href="modify_passwd.html">修改密码</a></dd>
+    </dl>
+  </li>
+  <li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">我是管理员</a>
+    <dl class="layui-nav-child">
+      <dd><a href="model_setting.html">模型设置</a></dd>
+      <dd><a href="count_analysis.html">统计分析</a></dd>
+      <dd><a href="privilege_setting.html">权限设置</a></dd>
+    </dl>
+  </li>
+ </ul>
+</div>
+
+<!--设置管理员-->
+<div class="setAdmin">
+<fieldset style="width:950px; padding-top:20px; padding-left:40px; padding-bottom:20px;">
+<legend><h1>设置管理员</h1></legend>
+<form class="layui-form layui-form-pane" action="">
+  <div class="layui-form-item" style="font-size:16px">
+    <label class="layui-form-label" style="width:130px">输入用户名</label>
+    <div class="layui-input-block">
+      <input type="tel" name="useName"  autocomplete="off"  lay-verify="required" placeholder="请输入要设为管理员的用户名" class="layui-input" style="width:350px">
+    </div>
+  </div>
+ 
+  <div class="layui-form-item" style="font-size:16px">
+    <label class="layui-form-label" style="width:130px">输入手机号</label>
+    <div class="layui-input-block">
+      <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" placeholder="请输入要设为管理员的用户手机号" class="layui-input" style="width:350px">
+    </div>
+  </div>
+ <!--提交按钮-->
+ <div class="subAdmin"> 
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+  </div>
+ </form>
+</fieldset> 
+</div>
+<!--管理已有管理员-->
+<div class="manaAdmin">
+<fieldset style="width:950px; padding:20px; ">
+<legend><h1>管理已有管理员</h1></legend>
+<table class="layui-table" lay-even="" lay-skin="nob">
+  <colgroup>
+    <col width="250">
+    <col width="250">
+    <col width="300">
+    <col>
+  </colgroup>
+  <thead>
+    <tr>
+      <th>用户名</th>
+      <th>手机号</th>
+      <th>邮箱</th>
+      <th>操作</th>
+    </tr> 
+  </thead>
+  <tbody>
+    <tr>
+      <td>Zhangsan</td>
+      <td>13100000000</td>
+      <td>njsaidwu@163.com</td>
+      <td><a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a></td>
+    </tr>
+  </tbody>
+</table> 
+</fieldset> 
+</div>
+<!--总在最后-->	
+	<div class="footer">
+        <hr class="layui-bg-red">
+      <p>二手车交易大数据分析平台© 2017 derder 版权所有 </p>
+    </div>
+<script>
+layui.use('element', function(){
+  var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+  
+  //监听导航点击
+  element.on('nav(filter)', function(elem){
+    //console.log(elem)
+    layer.msg(elem.text());
+  });
+});
+//搜索
+layui.use('form', function(){
+	var form = layui.form
+  	,layer = layui.layer
+});
+</script>
+
+<script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+layui.use('table', function(){
+  var table = layui.table;
+  //监听表格复选框选择
+  table.on('checkbox(demo)', function(obj){
+    console.log(obj)
+  });
+  //监听工具条
+  table.on('tool(demo)', function(obj){
+    var data = obj.data;
+    if(obj.event === 'detail'){
+      layer.msg('ID：'+ data.id + ' 的查看操作');
+    } else if(obj.event === 'del'){
+      layer.confirm('真的删除行么', function(index){
+        obj.del();
+        layer.close(index);
+      });
+    } else if(obj.event === 'edit'){
+      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+    }
+  });
+  
+  var $ = layui.$, active = {
+    getCheckData: function(){ //获取选中数据
+      var checkStatus = table.checkStatus('idTest')
+      ,data = checkStatus.data;
+      layer.alert(JSON.stringify(data));
+    }
+    ,getCheckLength: function(){ //获取选中数目
+      var checkStatus = table.checkStatus('idTest')
+      ,data = checkStatus.data;
+      layer.msg('选中了：'+ data.length + ' 个');
+    }
+    ,isAll: function(){ //验证是否全选
+      var checkStatus = table.checkStatus('idTest');
+      layer.msg(checkStatus.isAll ? '全选': '未全选')
+    }
+  };
+  
+  $('.demoTable .layui-btn').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+});
+</script>
+
+
+</body>
+</html>

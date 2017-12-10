@@ -28,4 +28,6 @@ public class Restful_Code {
 	
 	public static final int SERVICE_UNAVAILABLE = 503;//
 	
+	public static final int DATABASE_ACCESS_ERROR = 1000;//数据库访问异常
+	
 }

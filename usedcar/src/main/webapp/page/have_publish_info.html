@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>二手车交易大数据分析平台</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="../layui/layui.all.js" charset="utf-8"></script>
+  <script src="../layui/layui.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="../layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="../style/global.css" media="all">
+  <link rel="stylesheet" href="../style/personal.css" media="all">
+  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+
+
+
+<body>
+	<div class="layui-header header">
+    	<div class="layui-main">
+			<a class="logo" href="main.html" title="二手车交易大数据分析平台">
+				<img src="/img/logo1.png" alt="layui">
+			</a>
+			<ul class="layui-nav layui-layout-left">
+				<li class="layui-nav-item "><a href="main.html">首页</a></li>
+				<li class="layui-nav-item "><a href="search.html">搜索</a></li>
+				<li class="layui-nav-item "><a href="register_car_info.html">发布信息</a></li>	
+					
+			</ul>
+			<ul class="layui-nav layui-layout-right">
+				<li class="layui-nav-item">
+				<a href="javascript:;">我</a>
+				<dl class="layui-nav-child">
+				  <dd><a href="personal_center.html">个人中心</a></dd>
+				  <dd><a href="login.html">退出</a></dd>
+				</dl>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+<!--侧边栏-->
+<div class="personalmenu">
+<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px; height:600px">
+  <li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">账号管理</a>
+    <dl class="layui-nav-child">
+      <dd><a href="personal_center.html">个人信息</a></dd>
+      <dd><a href="have_publish_info.html">已发布信息</a></dd>
+      <dd><a href="modify_passwd.html">修改密码</a></dd>
+    </dl>
+  </li>
+  <li class="layui-nav-item layui-nav-itemed">
+    <a href="javascript:;">我是管理员</a>
+    <dl class="layui-nav-child">
+      <dd><a href="model_setting.html">模型设置</a></dd>
+      <dd><a href="count_analysis.html">统计分析</a></dd>
+      <dd><a href="privilege_setting.html">权限设置</a></dd>
+    </dl>
+  </li>
+ </ul>
+</div>
+
+<!--表格-->
+<div class="per-publish-table">
+<table class="layui-table" lay-even="" lay-skin="nob">
+  <colgroup>
+    <col width="150">
+    <col width="150">
+    <col width="150">
+    <col width="150">
+    <col width="380">
+    <col>
+  </colgroup>
+  <thead>
+    <tr>
+      <th>发布时间</th>
+      <th>车型</th>
+      <th>颜色</th>
+      <th>品牌车系</th>
+      <th>所在地址</th>
+      <th>详情</th>
+    </tr> 
+  </thead>
+  <tbody>
+    <tr>
+      <td>2017-1-1</td>
+      <td>suv</td>
+      <td>黑</td>
+      <td>奥迪a7</td>
+      <td>江苏省南京市江宁区胜太西路12号</td>
+      <td><a href="have_publish_info.html">详情</a></td>
+    </tr>
+  </tbody>
+</table> 
+</div>
+
+
+<!--总在最后-->	
+	<div class="footer">
+        <hr class="layui-bg-red">
+      <p>二手车交易大数据分析平台© 2017 derder 版权所有 </p>
+    </div>
+
+<script>
+layui.use('element', function(){
+  var element = layui.element(); //导航的hover效果、二级菜单等功能，需要依赖element模块
+  
+  //监听导航点击
+  element.on('nav(filter)', function(elem){
+    //console.log(elem)
+    layer.msg(elem.text());
+  });
+});
+//搜索
+layui.use('form', function(){
+	var form = layui.form
+  	,layer = layui.layer
+});
+</script>
+
+</body>
+</html>

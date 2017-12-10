@@ -12,41 +12,279 @@
 </head>
 
 <body>
-	<h2 align="center">
-		User List
-		</h1>
-		<table align="center" id="userList" border="1">
-			<tr>
-				<th>id</th>
-				<th>name</th>
-				<th>password</th>
-			</tr>
-		</table>
-		
+	<table align="center" width="800px">
+		<tr>
+			<td>
+
+
+				<h2>Add User PUT</h2>
+				<form id="putAddForm">
+					<table>
+						<tr>
+							<td align="right">id:</td>
+							<td><input type="number" name="id">
+						</tr>
+						<tr>
+							<td align="right">name:</td>
+							<td><input type="text" name="name"></td>
+						</tr>
+						<tr>
+							<td align="right">password:</td>
+							<td><input type="text" name="password"></td>
+						</tr>
+						<tr>
+							<td align="right"><button type="button"
+									onclick="addUserPut()">submit</button></td>
+							<td align="right"><button type="reset">reset</button>
+							<td>
+						</tr>
+					</table>
+				</form> <br>
+
+
+				<h2>Add User POST</h2>
+				<form id="postAddForm">
+					<table>
+						<tr>
+							<td align="right">name:</td>
+							<td><input type="text" name="name"></td>
+						</tr>
+						<tr>
+							<td align="right">password:</td>
+							<td><input type="text" name="password"></td>
+						</tr>
+						<tr>
+							<td align="right"><button type="button"
+									onclick="addUserPost()">submit</button></td>
+							<td align="right"><button type="reset">reset</button>
+							<td>
+						</tr>
+					</table>
+				</form>
+
+
+
+				<h2>Update User PATCH</h2>
+				<form id="patchAddForm">
+					<table>
+						<tr>
+							<td align="right">id:</td>
+							<td><input type="number" name="id">
+						</tr>
+						<tr>
+							<td align="right">name:</td>
+							<td><input type="text" name="name"></td>
+						</tr>
+						<tr>
+							<td align="right">password:</td>
+							<td><input type="text" name="password"></td>
+						</tr>
+						<tr>
+							<td align="right"><button type="button"
+									onclick="updateUser()">submit</button></td>
+							<td align="right"><button type="reset">reset</button>
+							<td>
+						</tr>
+					</table>
+				</form>
+
+
+
+				<h2>Delete User DELETE</h2>
+				<form id="deleteAddForm">
+					<table>
+						<tr>
+							<td align="right">id:</td>
+							<td><input type="number" name="id">
+						</tr>
+						<tr>
+							<td align="right"><button type="button" onclick="delUser()">submit</button></td>
+							<td align="right"><button type="reset">reset</button>
+							<td>
+						</tr>
+					</table>
+				</form>
+			</td>
+
+
+
+
+			<td>
+				<h2 align="center">User List</h2>
+				<table align="center" id="userList" border="1">
+					<tr>
+						<th>id</th>
+						<th>name</th>
+						<th>password</th>
+					</tr>
+				</table>
+			</td>
+
+
+		</tr>
+	</table>
 </body>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(
-			function() {
-				$.ajax({
-					url : "/usedcar/user",
-					type : "get",
-					data : {},
-					success : function(data) {
-						data = eval('(' + data + ')');
-						$.each(data.data, function(i, value) {
-							
-							$("#userList").append(
-									$("<tr><td>" + value.id + "</td><td>"
-											+ value.name + "</td><td>"
-											+ value.password + "</td></tr>"))
-						})
-					},
-					error : function() {
-						alert("query user list error!")
-					},
-					dataType : "json"
-				})
-			})
+	$(document)
+			.ready(
+					function() {
+						$
+								.ajax({
+									url : "/usedcar/user",
+									type : "get",
+									data : {},
+									success : function(data) {
+										data = eval('(' + data + ')');
+										if (data.code == 200) {
+											$
+													.each(
+															data.data,
+															function(i, value) {
+																$("#userList")
+																		.append(
+																				$("<tr id='user"+value.id+"'><td>"
+																						+ value.id
+																						+ "</td><td>"
+																						+ value.name
+																						+ "</td><td>"
+																						+ value.password
+																						+ "</td></tr>"))
+															})
+										} else {
+											alert(data.msg)
+										}
+									},
+									error : function() {
+										alert("query user list error!")
+									},
+									dataType : "json"
+								})
+					})
+
+	function addUserPut() {
+		var id = $("#putAddForm input[name='id']").val()
+		var name = $("#putAddForm input[name='name']").val()
+		var password = $("#putAddForm input[name='password']").val()
+		var args = {
+			id : parseInt(id),
+			name : name,
+			password : password
+		}
+		$.ajax({
+			url : "user",
+			type : "put",
+			data : JSON.stringify(args),
+			success : function(data) {
+				data = eval('(' + data + ')');
+				if (data.code == 201) {
+					var value = data.data
+					$("#userList").append(
+							$("<tr id='user"+value.id+"'><td>" + value.id
+									+ "</td><td>" + value.name + "</td><td>"
+									+ value.password + "</td></tr>"))
+				} else {
+					alert(data.msg)
+				}
+			},
+			error : function() {
+				alert("add user error")
+			},
+			dataType : "json",
+			contentType : "application/json"
+		})
+	}
+
+	function addUserPost() {
+		var name = $("#postAddForm input[name='name']").val()
+		var password = $("#postAddForm input[name='password']").val()
+		var args = {
+			name : name,
+			password : password
+		}
+		$.ajax({
+			url : "user",
+			type : "post",
+			data : JSON.stringify(args),
+			success : function(data) {
+				data = eval('(' + data + ')');
+				if (data.code == 201) {
+					var value = data.data
+					$("#userList").append(
+							$("<tr id='user"+value.id+"'><td>" + value.id
+									+ "</td><td>" + value.name + "</td><td>"
+									+ value.password + "</td></tr>"))
+				} else {
+					alert(data.msg)
+				}
+			},
+			error : function() {
+				alert("add user error")
+			},
+			dataType : "json",
+			contentType : "application/json"
+		})
+	}
+
+	function updateUser() {
+		var id = $("#patchAddForm input[name='id']").val()
+		var name = $("#patchAddForm input[name='name']").val()
+		if (name == "")
+			name = null
+		var password = $("#patchAddForm input[name='password']").val()
+		if (password == "")
+			password = null
+		var args = {
+			id : parseInt(id),
+			name : name,
+			password : password
+		}
+		$.ajax({
+			url : "user",
+			type : "patch",
+			data : JSON.stringify(args),
+			success : function(data) {
+				data = eval('(' + data + ')')
+				if (data.code = 201) {
+					alert(data.msg)
+					var value = data.data
+					$("#user" + value.id).html(
+							"<td>" + value.id + "</td><td>" + value.name
+									+ "</td><td>" + value.password + "</td>")
+				} else {
+					alert(data.msg)
+				}
+			},
+			error : function() {
+				alert("update user error")
+			},
+			dataType : "json",
+			contentType : "application/json"
+		})
+	}
+
+	function delUser() {
+
+		var id = $("#deleteAddForm input[name='id']").val()
+		id = parseInt(id)
+		$.ajax({
+			url : "user/" + id,
+			type : "delete",
+			data : {},
+			success : function(data) {
+				data = eval('(' + data + ')')
+				if (data.code == 204) {
+					alert(data.msg)
+					var value = data.data
+					$("#user"+value.id).remove()
+				} else {
+					alert(data.msg)
+				}
+			},
+			error : function() {
+			},
+			dataType : "json"
+		})
+	}
 </script>
 </html>

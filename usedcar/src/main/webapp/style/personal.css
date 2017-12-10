@@ -1,0 +1,129 @@
+@charset "utf-8";
+/* CSS Document */
+.personalmenu{
+	position:relative;
+	top:65px;
+	font-size:24px;
+	}
+
+
+.perinfo{
+	position:relative;
+	top:-470px;
+	left:280px;
+	font-size:18px;
+	}
+.per-publish-table{
+	position:relative;
+	left:230px;
+	top:-520px;
+	border-color:#FFF;
+	width:1080px
+	}
+.per-publish{
+	position:relative;
+	top:-490px;
+	left:-35px
+	}
+.in-model{
+	position:relative;
+	left:400px;
+	top:-52px;
+	}
+.in-five{
+	position:relative;
+	top:-60px;
+	}
+.in-set{
+	position:relative;
+	left:400px;
+	top:-52px;
+	}
+.in-two{
+	position:relative;
+	top:-60px;
+	}
+.per-chPword{
+	font-size:18px;
+	position:relative;
+	top:-500px;
+	left:300px;
+	border-style:solid;
+	border-width:2px;
+	border-color:#A0A0A4;
+	padding:30px;
+	width:730px;
+	}
+.setAdmin{
+	position:relative;
+	top:-500px;
+	left:270px;
+	}
+.subAdmin{
+	position:relative;
+	left:650px;
+	}
+.manaAdmin{
+	position:relative;
+	top:-480px;
+	left:270px;
+	}
+.per-truename{
+	position:relative;
+	left:450px;
+	top:-54px;
+	}
+.per-five{
+	position:relative;
+	top:-30px;
+	}
+.per-borntime{
+	position:relative;
+	left:450px;
+	top:-82px;
+	}
+.per-three{
+	position:relative;
+	top:-65px;
+	}
+.change-phone{
+	 *{margin: 0;padding: 0;}
+        body{ background-color: #3A3A3A; }
+        #main{position: absolute;width: 200px;left: 50%;margin-left: -100px;top:200px;text-align: center;}
+        #main li{list-style-type: none;margin-top: 5px;}
+        #main li a{color: #fff;}
+        #main li a:hover{color: #99e;}
+        #main li a:active{color: #e99;}
+	}
+.change-phone{
+	position:relative;
+	top:-690px;
+	left:675px;
+	font-size:18px;
+	}
+..change-email{
+	 *{margin: 0;padding: 0;}
+        body{ background-color: #3A3A3A; }
+        #main{position: absolute;width: 200px;left: 50%;margin-left: -100px;top:200px;text-align: center;}
+        #main li{list-style-type: none;margin-top: 5px;}
+        #main li a{color: #fff;}
+        #main li a:hover{color: #99e;}
+        #main li a:active{color: #e99;}
+	}
+.change-email{
+	position:relative;
+	top:-660px;
+	left:675px;
+	font-size:18px;
+	}
+.per-return{
+	position:relative;
+	top:-640px;
+	left:940px;
+	font-size:16px;
+	}
+.per-analysis{
+	position:relative;
+	left:210px;
+	top:-540px;
+	}
