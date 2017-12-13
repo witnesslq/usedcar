@@ -112,4 +112,15 @@ public class User {
     public void setuRole(Integer uRole) {
         this.uRole = uRole;
     }
+
+	@Override
+	public String toString() {
+		return "User [uId=" + uId + ", uUsername=" + uUsername + ", uPassword="
+				+ uPassword + ", uName=" + uName + ", uSex=" + uSex
+				+ ", uBirth=" + uBirth + ", uPhone=" + uPhone + ", uProvince="
+				+ uProvince + ", uCity=" + uCity + ", uEmail=" + uEmail
+				+ ", uRole=" + uRole + "]";
+	}
+    
+    
 }

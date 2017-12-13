@@ -50,15 +50,18 @@ public class UserController {
 	 * @return String
 	 */
 	public String userRegister(@RequestBody User user) {
+		System.out.println(user);
 		String result = null;
 		try {
 			userService.register(user);
 			result = new RestfulResponseBean(Restful_Code.CREATED, user,
 					"register successful", MyConst.VERSION).toJSONStr();
 		} catch (UserServiceException e) {
+			e.printStackTrace();
 			result = new RestfulResponseBean(Restful_Code.UNPRPCESABLE_ENTITY,
 					null, e.getMessage(), MyConst.VERSION).toJSONStr();
 		} catch (RuntimeException re) {
+			re.printStackTrace();
 			result = new RestfulResponseBean(
 					Restful_Code.DATABASE_ACCESS_ERROR, null,
 					"data access error", MyConst.VERSION).toJSONStr();

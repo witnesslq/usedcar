@@ -130,63 +130,6 @@
 	});
 
 
-	$.fn.serializeObject = function() {
-		var o = {};
-		var a = this.serializeArray();
-		$.each(a, function() {
-			if (o[this.name] !== undefined) {
-				if (!o[this.name].push) {
-					o[this.name] = [ o[this.name] ];
-				}
-				o[this.name].push(this.value || '');
-			} else {
-				o[this.name] = this.value || '';
-			}
-		});
-		return o;
-	};
-	function register() {
-	var data = $("#registerForm").serializeObject()
-	var provCode = data.province.split('_')[0]
-	var cityList
-	for(var i=0;i<address.length;i++){
-		if(address[i].provinceCode==provCode){
-			data.province = address[i].provinceName
-			cityList = address[i].mallCityList
-			break
-		}
-	}
 	
-	for(var i=0;i<cityList.length;i++){
-		if(cityList[i].cityCode==data.city){
-			data.city = cityList[i].cityName
-			break
-		}
-	}
-		for(var key in data){
-			var newKey = ""+key;
-			newKey = newKey.substring(0,1).toUpperCase()+newKey.substring(1);
-			data["u"+newKey] = data[key]	
-		}
-		$.ajax({
-			url : "/usedcar/user",
-			type : "post",
-			dataType : "json",
-			contentType : "application/json",
-			data : JSON.stringify(data),
-			success : function(data) {
-			alert(data)
-				data = eval("(" + data + ")")
-				if (data.code == 201) {
-					
-				} else {
-					alert(data.msg)
-				}
-			},
-			error : function() {
-				alert("add user error")
-			}
-		})
-	}
 </script>
 </html>

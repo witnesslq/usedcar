@@ -66,13 +66,76 @@ layui.config({
         form.render();
     }
 	*/
+    
+    $.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name] !== undefined) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+	function register() {
+	var data = $("#registerForm").serializeObject()
+	var provCode = data.province.split('_')[0]
+	var cityList
+	for(var i=0;i<address.length;i++){
+		if(address[i].provinceCode==provCode){
+			data.province = address[i].provinceName
+			cityList = address[i].mallCityList
+			break
+		}
+	}
+	
+	for(var i=0;i<cityList.length;i++){
+		if(cityList[i].cityCode==data.city){
+			data.city = cityList[i].cityName
+			break
+		}
+	}
+		var args = {}
+		for(var key in data){
+			var newKey = ""+key;
+			newKey = newKey.substring(0,1).toUpperCase()+newKey.substring(1);
+			args["u"+newKey] = data[key]
+		}
+		$.ajax({
+			url : "/usedcar/user",
+			type : "post",
+			dataType : "json",
+			contentType : "application/json",
+			data : JSON.stringify(args),
+			success : function(data) {
+				data = eval("(" + data + ")")
+				if (data.code == 201) {
+					alert("注册成功")
+					location.href = "login.html"
+				} else {
+					registered = false
+					if("user has been used"==data.msg){
+						alert("用户名已被注册")
+					}
+				}
+			},
+			error : function() {
+				alert("add user error")
+			}
+		})
+	}
     var registered = false
    form.on("submit(register)",function(data){
     	if(!registered){
     		register()
     		registered = true;
     	}
-    	var index = layer.msg('提交成功，稍候将跳转到登录页面',{icon: 16,time:50000,shade:0.8});
+    	//var index = layer.msg('提交成功，稍候将跳转到登录页面',{icon: 16,time:50000,shade:0.8});
     });
     //提交个人资料
     form.on("submit(changeUser)",function(data){
