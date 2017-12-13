@@ -125,7 +125,7 @@ layui.config({
 				}
 			},
 			error : function() {
-				alert("add user error")
+				alert("连接服务器失败")
 			}
 		})
 	}
