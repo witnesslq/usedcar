@@ -1,41 +1,115 @@
 package com.zxd.usedcar.model;
 
+import java.util.Date;
+
 public class User {
-    private Integer id;
+    private Long uId;
 
-    private String name;
+    private String uUsername;
 
-    private String password;
+    private String uPassword;
 
-    public Integer getId() {
-        return id;
+    private String uName;
+
+    private Integer uSex;
+
+    private Date uBirth;
+
+    private String uPhone;
+
+    private String uProvince;
+
+    private String uCity;
+
+    private String uEmail;
+
+    private Integer uRole;
+
+    public Long getuId() {
+        return uId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setuId(Long uId) {
+        this.uId = uId;
     }
 
-    public String getName() {
-        return name;
+    public String getuUsername() {
+        return uUsername;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setuUsername(String uUsername) {
+        this.uUsername = uUsername == null ? null : uUsername.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public String getuPassword() {
+        return uPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setuPassword(String uPassword) {
+        this.uPassword = uPassword == null ? null : uPassword.trim();
     }
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", password=" + password
-				+ "]";
-	}
-    
-    
+    public String getuName() {
+        return uName;
+    }
+
+    public void setuName(String uName) {
+        this.uName = uName == null ? null : uName.trim();
+    }
+
+    public Integer getuSex() {
+        return uSex;
+    }
+
+    public void setuSex(Integer uSex) {
+        this.uSex = uSex;
+    }
+
+    public Date getuBirth() {
+        return uBirth;
+    }
+
+    public void setuBirth(Date uBirth) {
+        this.uBirth = uBirth;
+    }
+
+    public String getuPhone() {
+        return uPhone;
+    }
+
+    public void setuPhone(String uPhone) {
+        this.uPhone = uPhone == null ? null : uPhone.trim();
+    }
+
+    public String getuProvince() {
+        return uProvince;
+    }
+
+    public void setuProvince(String uProvince) {
+        this.uProvince = uProvince == null ? null : uProvince.trim();
+    }
+
+    public String getuCity() {
+        return uCity;
+    }
+
+    public void setuCity(String uCity) {
+        this.uCity = uCity == null ? null : uCity.trim();
+    }
+
+    public String getuEmail() {
+        return uEmail;
+    }
+
+    public void setuEmail(String uEmail) {
+        this.uEmail = uEmail == null ? null : uEmail.trim();
+    }
+
+    public Integer getuRole() {
+        return uRole;
+    }
+
+    public void setuRole(Integer uRole) {
+        this.uRole = uRole;
+    }
 }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxd.usedcar.mapper.CarBrandMapper">
+  <resultMap id="BaseResultMap" type="com.zxd.usedcar.model.CarBrand">
+    <id column="cb_id" jdbcType="BIGINT" property="cbId" />
+    <result column="cb_brand" jdbcType="VARCHAR" property="cbBrand" />
+    <result column="cb_series" jdbcType="VARCHAR" property="cbSeries" />
+    <result column="cb_type" jdbcType="VARCHAR" property="cbType" />
+    <result column="cb_year" jdbcType="VARCHAR" property="cbYear" />
+    <result column="cb_gas" jdbcType="DOUBLE" property="cbGas" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cb_id, cb_brand, cb_series, cb_type, cb_year, cb_gas
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_carbrand
+    where cb_id = #{cbId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_carbrand
+    where cb_id = #{cbId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zxd.usedcar.model.CarBrand">
+    insert into t_carbrand (cb_id, cb_brand, cb_series, 
+      cb_type, cb_year, cb_gas
+      )
+    values (#{cbId,jdbcType=BIGINT}, #{cbBrand,jdbcType=VARCHAR}, #{cbSeries,jdbcType=VARCHAR}, 
+      #{cbType,jdbcType=VARCHAR}, #{cbYear,jdbcType=VARCHAR}, #{cbGas,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zxd.usedcar.model.CarBrand">
+    insert into t_carbrand
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cbId != null">
+        cb_id,
+      </if>
+      <if test="cbBrand != null">
+        cb_brand,
+      </if>
+      <if test="cbSeries != null">
+        cb_series,
+      </if>
+      <if test="cbType != null">
+        cb_type,
+      </if>
+      <if test="cbYear != null">
+        cb_year,
+      </if>
+      <if test="cbGas != null">
+        cb_gas,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cbId != null">
+        #{cbId,jdbcType=BIGINT},
+      </if>
+      <if test="cbBrand != null">
+        #{cbBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="cbSeries != null">
+        #{cbSeries,jdbcType=VARCHAR},
+      </if>
+      <if test="cbType != null">
+        #{cbType,jdbcType=VARCHAR},
+      </if>
+      <if test="cbYear != null">
+        #{cbYear,jdbcType=VARCHAR},
+      </if>
+      <if test="cbGas != null">
+        #{cbGas,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zxd.usedcar.model.CarBrand">
+    update t_carbrand
+    <set>
+      <if test="cbBrand != null">
+        cb_brand = #{cbBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="cbSeries != null">
+        cb_series = #{cbSeries,jdbcType=VARCHAR},
+      </if>
+      <if test="cbType != null">
+        cb_type = #{cbType,jdbcType=VARCHAR},
+      </if>
+      <if test="cbYear != null">
+        cb_year = #{cbYear,jdbcType=VARCHAR},
+      </if>
+      <if test="cbGas != null">
+        cb_gas = #{cbGas,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where cb_id = #{cbId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zxd.usedcar.model.CarBrand">
+    update t_carbrand
+    set cb_brand = #{cbBrand,jdbcType=VARCHAR},
+      cb_series = #{cbSeries,jdbcType=VARCHAR},
+      cb_type = #{cbType,jdbcType=VARCHAR},
+      cb_year = #{cbYear,jdbcType=VARCHAR},
+      cb_gas = #{cbGas,jdbcType=DOUBLE}
+    where cb_id = #{cbId,jdbcType=BIGINT}
+  </update>
+</mapper>

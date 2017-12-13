@@ -66,34 +66,17 @@ layui.config({
         form.render();
     }
 	*/
-  
+    var registered = false
+   form.on("submit(register)",function(data){
+    	if(!registered){
+    		register()
+    		registered = true;
+    	}
+    	var index = layer.msg('提交成功，稍候将跳转到登录页面',{icon: 16,time:50000,shade:0.8});
+    });
     //提交个人资料
     form.on("submit(changeUser)",function(data){
     	var index = layer.msg('提交成功，稍候将跳转到登录页面',{icon: 16,time:50000,shade:0.8});
-        //将填写的用户信息存到session以便下次调取
-        var key,userInfoHtml = '';
-        userInfoHtml = {
-            'realName' : $(".realName").val(),
-            'sex' : data.field.sex,
-            'userPhone' : $(".userPhone").val(),
-            'userBirthday' : $(".userBirthday").val(),
-            'province' : data.field.province,
-            'city' : data.field.city,     
-            'userEmail' : $(".userEmail").val()
-         
-        };
-        for(key in data.field){
-            if(key.indexOf("like") != -1){
-                userInfoHtml[key] = "on";
-            }
-        }
-        window.sessionStorage.setItem("userInfo",JSON.stringify(userInfoHtml));
-        setTimeout(function(){
-            layer.close(index);
-			location.href="登录.html";
-        },2000);
-		//跳转到登录页面
-		
     });
 
     //修改密码
@@ -115,6 +98,7 @@ function loadProvince() {
         proHtml += '<option value="' + areaData[i].provinceCode + '_' + areaData[i].mallCityList.length + '_' + i + '">' + areaData[i].provinceName + '</option>';
     }
     //初始化省数据
+    $form.find('select[name=province]').html()
     $form.find('select[name=province]').append(proHtml);
     form.render();
     form.on('select(province)', function(data) {

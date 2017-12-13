@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxd.usedcar.mapper.CarFromMapper">
+  <resultMap id="BaseResultMap" type="com.zxd.usedcar.model.CarFrom">
+    <id column="cf_id" jdbcType="BIGINT" property="cfId" />
+    <result column="cf_from" jdbcType="VARCHAR" property="cfFrom" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cf_id, cf_from
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_carfrom
+    where cf_id = #{cfId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_carfrom
+    where cf_id = #{cfId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zxd.usedcar.model.CarFrom">
+    insert into t_carfrom (cf_id, cf_from)
+    values (#{cfId,jdbcType=BIGINT}, #{cfFrom,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zxd.usedcar.model.CarFrom">
+    insert into t_carfrom
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cfId != null">
+        cf_id,
+      </if>
+      <if test="cfFrom != null">
+        cf_from,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cfId != null">
+        #{cfId,jdbcType=BIGINT},
+      </if>
+      <if test="cfFrom != null">
+        #{cfFrom,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zxd.usedcar.model.CarFrom">
+    update t_carfrom
+    <set>
+      <if test="cfFrom != null">
+        cf_from = #{cfFrom,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cf_id = #{cfId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zxd.usedcar.model.CarFrom">
+    update t_carfrom
+    set cf_from = #{cfFrom,jdbcType=VARCHAR}
+    where cf_id = #{cfId,jdbcType=BIGINT}
+  </update>
+</mapper>

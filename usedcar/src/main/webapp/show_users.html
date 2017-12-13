@@ -125,7 +125,23 @@
 	</table>
 </body>
 <script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/json2.js"></script>
 <script type="text/javascript">
+	$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name]) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
 	$(document)
 			.ready(
 					function() {
@@ -133,9 +149,10 @@
 								.ajax({
 									url : "/usedcar/user",
 									type : "get",
+									dataType : "json",
 									data : {},
 									success : function(data) {
-										data = eval('(' + data + ')');
+										data = eval("(" + data + ")")
 										if (data.code == 200) {
 											$
 													.each(
@@ -157,8 +174,7 @@
 									},
 									error : function() {
 										alert("query user list error!")
-									},
-									dataType : "json"
+									}
 								})
 					})
 
@@ -167,16 +183,18 @@
 		var name = $("#putAddForm input[name='name']").val()
 		var password = $("#putAddForm input[name='password']").val()
 		var args = {
-			id : parseInt(id),
+			id : id,
 			name : name,
 			password : password
 		}
 		$.ajax({
 			url : "user",
 			type : "put",
+			dataType : "json",
+			contentType : "application/json",
 			data : JSON.stringify(args),
 			success : function(data) {
-				data = eval('(' + data + ')');
+				data = eval("(" + data + ")")
 				if (data.code == 201) {
 					var value = data.data
 					$("#userList").append(
@@ -189,9 +207,7 @@
 			},
 			error : function() {
 				alert("add user error")
-			},
-			dataType : "json",
-			contentType : "application/json"
+			}
 		})
 	}
 
@@ -202,12 +218,15 @@
 			name : name,
 			password : password
 		}
+		//args = $.toJSON($("#postAddForm").serializeObject())
 		$.ajax({
 			url : "user",
 			type : "post",
+			dataType : "json",
+			contentType:"application/json",
 			data : JSON.stringify(args),
 			success : function(data) {
-				data = eval('(' + data + ')');
+				data = eval("(" + data + ")")
 				if (data.code == 201) {
 					var value = data.data
 					$("#userList").append(
@@ -220,9 +239,7 @@
 			},
 			error : function() {
 				alert("add user error")
-			},
-			dataType : "json",
-			contentType : "application/json"
+			}
 		})
 	}
 
@@ -242,11 +259,11 @@
 		$.ajax({
 			url : "user",
 			type : "patch",
+			contentType:"application/json",
 			data : JSON.stringify(args),
 			success : function(data) {
 				data = eval('(' + data + ')')
 				if (data.code = 201) {
-					alert(data.msg)
 					var value = data.data
 					$("#user" + value.id).html(
 							"<td>" + value.id + "</td><td>" + value.name
@@ -258,8 +275,7 @@
 			error : function() {
 				alert("update user error")
 			},
-			dataType : "json",
-			contentType : "application/json"
+			dataType : "json"
 		})
 	}
 
@@ -276,7 +292,7 @@
 				if (data.code == 204) {
 					alert(data.msg)
 					var value = data.data
-					$("#user"+value.id).remove()
+					$("#user" + value.id).remove()
 				} else {
 					alert(data.msg)
 				}

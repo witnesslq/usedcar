@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zxd.usedcar.mapper.CarStateMapper">
+  <resultMap id="BaseResultMap" type="com.zxd.usedcar.model.CarState">
+    <id column="cs_id" jdbcType="BIGINT" property="csId" />
+    <result column="cs_state" jdbcType="VARCHAR" property="csState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cs_id, cs_state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_carstate
+    where cs_id = #{csId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_carstate
+    where cs_id = #{csId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zxd.usedcar.model.CarState">
+    insert into t_carstate (cs_id, cs_state)
+    values (#{csId,jdbcType=BIGINT}, #{csState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zxd.usedcar.model.CarState">
+    insert into t_carstate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="csId != null">
+        cs_id,
+      </if>
+      <if test="csState != null">
+        cs_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="csId != null">
+        #{csId,jdbcType=BIGINT},
+      </if>
+      <if test="csState != null">
+        #{csState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zxd.usedcar.model.CarState">
+    update t_carstate
+    <set>
+      <if test="csState != null">
+        cs_state = #{csState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cs_id = #{csId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zxd.usedcar.model.CarState">
+    update t_carstate
+    set cs_state = #{csState,jdbcType=VARCHAR}
+    where cs_id = #{csId,jdbcType=BIGINT}
+  </update>
+</mapper>

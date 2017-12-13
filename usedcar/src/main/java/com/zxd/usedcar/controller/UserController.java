@@ -1,7 +1,5 @@
 package com.zxd.usedcar.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zxd.usedcar.exception.UserServiceException;
 import com.zxd.usedcar.model.User;
-import com.zxd.usedcar.service.IUserService;
+import com.zxd.usedcar.service.UserService;
 import com.zxd.usedcar.util.MyConst;
 import com.zxd.usedcar.util.RestfulResponseBean;
 import com.zxd.usedcar.util.Restful_Code;
@@ -23,161 +21,83 @@ import com.zxd.usedcar.util.Restful_Code;
  * Title:UserController
  * </p>
  * <p>
- * Description:User View Controller
+ * Description:user view controller
  * </p>
  * <p>
  * Company:Benson Lab
  * </p>
  * 
  * @author Benson
- * @date 2017年12月10日 下午2:38:03
+ * @date 2017年12月13日 上午12:38:29
  * @version V1.0.0
  * @email 1455813736@qq.com
  */
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
 	@Autowired
-	private IUserService userService;
-
-	@RequestMapping(value = "", method = { RequestMethod.GET })
-	@ResponseBody
-	/**
-	 * 
-	 * <p> Title:UserController </p>
-	 * <p> Description:get all user info from database </p>
-	 * @param @return
-	 * @return String json
-	 * @throws
-	 */
-	public String getAll() {
-		List<User> users = null;
-		try {
-			users = userService.getAllUser();
-			return new RestfulResponseBean(Restful_Code.OK, users,
-					"query all users successful", MyConst.VERSION).toJSONStr();
-		} catch (UserServiceException e) {
-			e.printStackTrace();
-			return new RestfulResponseBean(e.getErrorCode(), users,
-					e.getMessage(), MyConst.VERSION).toJSONStr();
-		}
-	}
-
-	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
-	@ResponseBody
-	/**
-	 * 
-	 * <p> Title:UserController </p>
-	 * <p> Description:get user info by user's id </p>
-	 * @param @param id
-	 * @param @return
-	 * @return String json
-	 * @throws
-	 */
-	public String getById(@PathVariable int id) {
-		User user = null;
-		try {
-			user = userService.getUserById(id);
-			return new RestfulResponseBean(Restful_Code.OK, user,
-					"query user for id=" + id + " successful", MyConst.VERSION)
-					.toJSONStr();
-		} catch (UserServiceException e) {
-			e.printStackTrace();
-			return new RestfulResponseBean(e.getErrorCode(), user,
-					e.getMessage(), MyConst.VERSION).toJSONStr();
-		}
-	}
-
-	@RequestMapping(value = "", method = { RequestMethod.PUT })
-	@ResponseBody
-	/**
-	 * 
-	 * <p> Title:UserController </p>
-	 * <p> Description:insert a user info into database with id </p>
-	 * @param @param user
-	 * @param @return
-	 * @return String
-	 * @throws
-	 */
-	public String addUserWithId(@RequestBody User user) {
-		try {
-			userService.addUserWithId(user);
-			return new RestfulResponseBean(Restful_Code.CREATED, user,
-					"insert user successful", MyConst.VERSION).toJSONStr();
-		} catch (UserServiceException e) {
-			e.printStackTrace();
-			return new RestfulResponseBean(e.getErrorCode(), null,
-					e.getMessage(), MyConst.VERSION).toJSONStr();
-		}
-	}
+	private UserService userService;
 
 	@RequestMapping(value = "", method = { RequestMethod.POST })
 	@ResponseBody
 	/**
 	 * 
 	 * <p> Title:UserController </p>
-	 * <p> Description:insert a user info into database with id </p>
-	 * @param @param user
-	 * @param @return
-	 * @return String
-	 * @throws
-	 */
-	public String addUserWithoutId(@RequestBody User user) {
-		try {
-			userService.addUserWithoutId(user);
-			return new RestfulResponseBean(Restful_Code.CREATED, user,
-					"insert user successful", MyConst.VERSION).toJSONStr();
-		} catch (UserServiceException e) {
-			e.printStackTrace();
-			return new RestfulResponseBean(e.getErrorCode(), null,
-					e.getMessage(), MyConst.VERSION).toJSONStr();
-		}
-	}
-
-	@RequestMapping(value = "", method = { RequestMethod.PATCH })
-	@ResponseBody
-	/**
-	 * 
-	 * <p> Title:UserController </p>
-	 * <p> Description:update a user info with id </p>
+	 * <p> Description:user register a account and return the account info </p>
 	 * @param user
 	 * @return
 	 * @return String
 	 */
-	public String updateUser(@RequestBody User user) {
+	public String userRegister(@RequestBody User user) {
+		String result = null;
 		try {
-			userService.updateUser(user);
-			user = userService.getUserById(user.getId());
-			return new RestfulResponseBean(Restful_Code.CREATED, user,
-					"update user successful", MyConst.VERSION).toJSONStr();
+			userService.register(user);
+			result = new RestfulResponseBean(Restful_Code.CREATED, user,
+					"register successful", MyConst.VERSION).toJSONStr();
 		} catch (UserServiceException e) {
-			e.printStackTrace();
-			return new RestfulResponseBean(e.getErrorCode(), null,
-					e.getMessage(), MyConst.VERSION).toJSONStr();
+			result = new RestfulResponseBean(Restful_Code.UNPRPCESABLE_ENTITY,
+					null, e.getMessage(), MyConst.VERSION).toJSONStr();
+		} catch (RuntimeException re) {
+			result = new RestfulResponseBean(
+					Restful_Code.DATABASE_ACCESS_ERROR, null,
+					"data access error", MyConst.VERSION).toJSONStr();
 		}
+		return result;
 	}
 
-	@RequestMapping(value = "/{id}", method = { RequestMethod.DELETE })
-	@ResponseBody
 	/**
 	 * 
-	 * <p> Title:UserController </p>
-	 * <p> Description:delete a user info by id </p>
-	 * @param id
+	 * <p>
+	 * Title:UserController
+	 * </p>
+	 * <p>
+	 * Description:user sign in the system using username and password
+	 * </p>
+	 * 
+	 * @param user
 	 * @return
 	 * @return String
 	 */
-	public String delUser(@PathVariable int id) {
-		User user;
+	@RequestMapping(value = "/{username}/{password}", method = { RequestMethod.GET })
+	public String login(@PathVariable("username") String username,
+			@PathVariable("password") String password) {
+		User user = new User();
+		user.setuUsername(username);
+		user.setuPassword(password);
+		String result = null;
 		try {
-			user = userService.getUserById(id);
-			userService.delUser(user);
-			return new RestfulResponseBean(Restful_Code.DELETED, user,
-					"delete user successful", MyConst.VERSION).toJSONStr();
+			User getUser = userService.login(user);
+			result = new RestfulResponseBean(Restful_Code.OK, getUser,
+					"login successful", MyConst.VERSION).toJSONStr();
 		} catch (UserServiceException e) {
-			e.printStackTrace();
-			return new RestfulResponseBean(e.getErrorCode(), null,
-					e.getMessage(), MyConst.VERSION).toJSONStr();
+			result = new RestfulResponseBean(Restful_Code.UNPRPCESABLE_ENTITY,
+					null, e.getMessage(), MyConst.VERSION).toJSONStr();
+		} catch (RuntimeException re) {
+			result = new RestfulResponseBean(
+					Restful_Code.DATABASE_ACCESS_ERROR, null,
+					"data access error", MyConst.VERSION).toJSONStr();
 		}
+		return result;
 	}
 }
