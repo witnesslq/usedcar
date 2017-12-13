@@ -113,7 +113,6 @@ layui.config({
 			contentType : "application/json",
 			data : JSON.stringify(args),
 			success : function(data) {
-				data = eval("(" + data + ")")
 				if (data.code == 201) {
 					alert("注册成功")
 					location.href = "login.html"

@@ -1,5 +1,10 @@
 package com.zxd.usedcar.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -102,5 +107,23 @@ public class UserController {
 					"data access error", MyConst.VERSION).toJSONStr();
 		}
 		return result;
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public void loginJSP(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		User user = new User();
+		user.setuUsername(username);
+		user.setuPassword(password);
+		try {
+			User getUser = userService.login(user);
+			request.getSession().setAttribute("user", getUser);
+			response.sendRedirect("/usedcar/page/main.html");
+		} catch (UserServiceException e) {
+			e.printStackTrace();
+			response.sendRedirect("/usedcar/page/main.html");
+		}
 	}
 }
