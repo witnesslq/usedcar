@@ -120,10 +120,10 @@ public class UserController {
 		try {
 			User getUser = userService.login(user);
 			request.getSession().setAttribute("user", getUser);
-			response.sendRedirect("/usedcar/page/main.html");
+			response.sendRedirect("/usedcar/page/Main.jsp");
 		} catch (UserServiceException e) {
 			e.printStackTrace();
-			response.sendRedirect("/usedcar/page/main.html");
+			response.sendRedirect("/usedcar/page/Login.jsp");
 		}
 	}
 }

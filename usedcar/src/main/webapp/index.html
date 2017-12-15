@@ -1,5 +1,92 @@
 <html>
+<head>
+<meta charset="UTF8" />
+</head>
 <body>
-<h2>Hello !</h2>
+	<form style="margin-top: 20%;margin-left: 30%;">
+		<select id="1" onchange="oneChange()"><option>请选择第一项</option></select><select
+			id="2" disabled="disabled" onchange="twoChange()"><option>请选择第二项</option></select><select
+			id="3" disabled="disabled"><option>请选择第三项</option></select>
+	</form>
 </body>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$.ajax({
+					url : "/usedcar/demo/one",
+					type : "get",
+					dataType : "json",
+					data : {},
+					success : function(data) {
+						for (i in data) {
+							$("#1").append(
+									$("<option value='"+data[i].one_id+"'>"
+											+ data[i].one_name + "</option>"))
+						}
+					},
+					error : function() {
+						alert("连接服务器失败")
+					}
+				})
+			})
+
+	function getTwo() {
+		$.ajax({
+			url : "/usedcar/demo/two/" + $("#1").val(),
+			type : "get",
+			dataType : "json",
+			data : {},
+			success : function(data) {
+				$("#2").html("<option>请选择第二项</option>")
+				for (i in data) {
+					$("#2").append(
+							$("<option value='"+data[i].two_id+"'>"
+									+ data[i].two_name + "</option>"))
+				}
+				$("#2").removeAttr("disabled")
+			},
+			error : function() {
+				alert("连接服务器失败")
+			}
+		})
+	}
+
+	function oneChange() {
+		if ($("#1").val() != "请选择第一项") {
+			getTwo()
+		} else {
+			$("#2").attr("disabled", "disabled")
+		}
+	}
+
+	function getThree() {
+		$.ajax({
+			url : "/usedcar/demo/three/" + $("#1").val()+"/"+$("#2").val(),
+			type : "get",
+			dataType : "json",
+			data : {},
+			success : function(data) {
+				$("#3").html("<option>请选择第三项</option>")
+				for (i in data) {
+					$("#3").append(
+							$("<option value='"+data[i].three_id+"'>"
+									+ data[i].three_name + "</option>"))
+				}
+				$("#3").removeAttr("disabled")
+			},
+			error : function() {
+				alert("连接服务器失败")
+			}
+		})
+	}
+
+	function twoChange() {
+		if ($("#2").val() != "请选择第二项") {
+			getThree()
+		} else {
+			$("#3").attr("disabled", "disabled")
+		}
+	}
+</script>
 </html>
